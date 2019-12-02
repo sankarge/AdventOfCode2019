@@ -4,8 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +24,7 @@ public class AdventOfCode {
     @Autowired
     private ResourceLoader resourceLoader;
 
-    public List<Long> getNumbers(String day) throws IOException {
+    public List<Long> getInput(String day) throws IOException {
         Resource resource = resourceLoader.getResource("classpath:day" + day + "/input");
         InputStream inputStream = resource.getInputStream();
         InputStreamReader inputStreamReader = new InputStreamReader(inputStream);

@@ -12,30 +12,31 @@ class Day01 extends AdventOfCode {
 
     long solve_a() throws IOException {
         return getFuel()
+                .map(this::calculateFuel)
                 .reduce(0L, Long::sum);
     }
 
     long solve_b() throws IOException {
         return getFuel()
-                .map(this::calcFuelForFuel)
+                .map(this::calculateFuel)
+                .map(this::addFuelForFuel)
                 .reduce(0L, Long::sum);
     }
 
-    private Stream<Long> getFuel() throws IOException {
-        return getNumbers("01").stream()
-                .map(this::calculateFuel);
+    private long addFuelForFuel(Long fuel) {
+        return fuel + calcFuelForFUel(fuel);
     }
 
-    private long calcFuelForFuel(Long fuel) {
-        return fuel + getFuelForFuel(fuel);
-    }
-
-    private long getFuelForFuel(final long fuel) {
+    private long calcFuelForFUel(final long fuel) {
         long calculatedFuel = calculateFuel(fuel);
-        return calculatedFuel <= 0 ? 0 : calculatedFuel + getFuelForFuel(calculatedFuel);
+        return calculatedFuel <= 0 ? 0 : calculatedFuel + calcFuelForFUel(calculatedFuel);
     }
 
     private long calculateFuel(final long weight) {
         return weight / 3L - 2L;
+    }
+
+    private Stream<Long> getFuel() throws IOException {
+        return getInput("01").stream();
     }
 }
