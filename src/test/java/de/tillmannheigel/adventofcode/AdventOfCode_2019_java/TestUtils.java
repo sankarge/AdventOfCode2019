@@ -43,4 +43,20 @@ public class TestUtils {
         return result;
 
     }
+
+    public static List<List<String>> getCommaSeperatedLines(String path) throws IOException {
+        ClassLoader classLoader = TestUtils.class.getClassLoader();
+        URL url = classLoader.getResource(path);
+        InputStream inputStream = url.openStream();
+        InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+        ArrayList<List<String>> result = new ArrayList<>();
+        String line;
+        while ((line = bufferedReader.readLine()) != null) {
+            String[] split = line.split(",");
+            result.add(Arrays.asList(split));
+        }
+        return result;
+
+    }
 }
